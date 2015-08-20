@@ -1,5 +1,7 @@
 <h1> Log in! </h1>
 
+<%= render partial: "layouts/errors" %>
+
 <form action="<%= session_url %>" method="post" %>
   <%= auth_token %>
 
@@ -7,8 +9,7 @@
   <input
     type="text"
     id="user_email"
-    name="user[email]"
-    value="<%= @user.email %>">
+    name="user[email]">
   <br>
 
   <label for="user_password">Password</label>

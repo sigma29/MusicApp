@@ -3,8 +3,9 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
+    @album.band_id = Integer(params[:band_id])
     @bands = Band.all
-    @current_band = Integer(params[:band_id])
+
     render :new
   end
 

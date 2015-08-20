@@ -1,6 +1,7 @@
 <% button_text = band.persisted? ? "Update band" : "Add band" %>
 <% method = band.persisted? ? "patch" : "post" %>
 <% action = band.persisted? ? band_url(band) : bands_url %>
+
 <form action="<%= action %>" method="post">
   <input type="hidden" name="_method" value="<%= method %>">
   <%= auth_token %>
@@ -10,7 +11,7 @@
     type="text"
     name="band[name]"
     id="band_name"
-    value="<%= band.name %>">  
+    value="<%= band.name %>">
 
   <button><%= button_text %></button>
 <form>

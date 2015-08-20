@@ -31,7 +31,4 @@ class ApplicationController < ActionController::Base
     redirect_to user_url(current_user) if logged_in?
   end
 
-  def can_delete_this_note?(note)
-    current_user.id == note.user_id
-  end
 end

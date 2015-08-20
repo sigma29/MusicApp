@@ -3,8 +3,8 @@ class TracksController < ApplicationController
 
   def new
     @track = Track.new
+    @track.album_id = Integer(params[:album_id])
     @albums = Album.all
-    @current_album = Integer(params[:album_id])
     render :new
   end
 
@@ -45,14 +45,13 @@ class TracksController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:id])
-    @notes = @track.notes.includes(:user)
+    @track = Track.includes(notes: [:user]).find(params[:id])
     render :show
   end
 
   private
 
   def track_params
-    params.require(:track).permit(:title, :album_id, :track_type)
+    params.require(:track).permit(:title, :album_id, :track_type,:lyrics)
   end
 end

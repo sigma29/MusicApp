@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :require_no_user, only: :new 
+  before_action :require_no_user, only: :new
 
   def new
     @user = User.new

@@ -11,6 +11,10 @@ class NotesController < ApplicationController
   def destroy
     note = Note.find(params[:id])
     track = note.track
+    unless current_user.owns_note?(note)
+      render text: "Bad user!  Don't delete others' notes", status: :forbidden
+      return
+    end
     note.destroy
 
     redirect_to track_url(track)

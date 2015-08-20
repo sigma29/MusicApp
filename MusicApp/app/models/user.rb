@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   def self.find_by_credentials(email,password)
     user = User.find_by(email: email)
+    return unless user
     return user.is_password?(password) ? user : nil
   end
 
@@ -33,6 +34,9 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(password_digest).is_password?(password)
   end
 
+  def owns_note?(note)
+    self.id == note.user_id
+  end
   private
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
