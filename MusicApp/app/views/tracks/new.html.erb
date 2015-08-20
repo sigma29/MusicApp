@@ -1,0 +1,6 @@
+<h1> Create a new track!</h1>
+
+<%= render partial: "layouts/errors" %>
+
+<%= render partial: "form",
+  locals: { track: @track, albums: @albums, current_album_id: @current_album }%>

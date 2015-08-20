@@ -4,7 +4,7 @@ class TracksController < ApplicationController
   def new
     @track = Track.new
     @albums = Album.all
-    @current_band = Integer(params[:band_id])
+    @current_album = Integer(params[:album_id])
     render :new
   end
 
@@ -14,13 +14,13 @@ class TracksController < ApplicationController
       redirect_to track_url(@track)
     else
       flash.now[:errors] = @track.errors.full_messages
-      @bands = Band.all
+      @albums = Album.all
       render :new
     end
   end
 
   def edit
-    @bands = Band.all
+    @albums = Album.all
     @track = Track.find(params[:id])
     render :edit
   end
@@ -31,21 +31,21 @@ class TracksController < ApplicationController
       redirect_to track_url(@track)
     else
       flash.now[:errors] = @track.errors.full_messages
-      @bands = Band.all
-      fail
+      @albums = Album.all
       render :edit
     end
 
   end
 
   def destroy
-    Track.find(params[:id]).destroy
-    redirect_to bands_url
+    track = Track.find(params[:id])
+    album = track.album
+    track.destroy
+    redirect_to album_url(album)
   end
 
   def show
     @track = Track.find(params[:id])
-    @tracks = @track.tracks
     render :show
   end
 
