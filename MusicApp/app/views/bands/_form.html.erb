@@ -4,11 +4,13 @@
 <form action="<%= action %>" method="post">
   <input type="hidden" name="_method" value="<%= method %>">
   <%= auth_token %>
+
   <label for="band_name">Name of Band</label>
   <input
     type="text"
     name="band[name]"
     id="band_name"
-    value="<%= band.name %>">
+    value="<%= band.name %>">  
+
   <button><%= button_text %></button>
 <form>

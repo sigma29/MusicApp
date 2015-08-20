@@ -27,8 +27,8 @@ class BandsController < ApplicationController
   end
 
   def update
-    @band = Band.new(band_params)
-    if @band.save
+    @band = Band.find(params[:id])
+    if @band.update(band_params)
       redirect_to band_url(@band)
     else
       flash.now[:errors] = @band.errors.full_messages

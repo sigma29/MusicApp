@@ -3,6 +3,8 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
+    @bands = Band.all
+    @current_band = Integer(params[:band_id])
     render :new
   end
 
@@ -12,21 +14,24 @@ class AlbumsController < ApplicationController
       redirect_to album_url(@album)
     else
       flash.now[:errors] = @album.errors.full_messages
+      @bands = Band.all
       render :new
     end
   end
 
   def edit
+    @bands = Band.all
     @album = Album.find(params[:id])
     render :edit
   end
 
   def update
-    @album = album.new(album_params)
-    if @album.save
+    @album = Album.find(params[:id])
+    if @album.update(album_params)
       redirect_to album_url(@album)
     else
       flash.now[:errors] = @album.errors.full_messages
+      @bands = Band.all
       render :edit
     end
 
@@ -35,5 +40,17 @@ class AlbumsController < ApplicationController
   def destroy
     Album.find(params[:id]).destroy
     redirect_to bands_url
+  end
+
+  def show
+    @album = Album.find(params[:id])
+    @tracks = @album.tracks
+    render :show
+  end
+
+  private
+
+  def album_params
+    params.require(:album).permit(:name, :band_id, :recording_type)
   end
 end

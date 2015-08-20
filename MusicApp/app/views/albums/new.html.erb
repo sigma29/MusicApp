@@ -1,0 +1,6 @@
+<h1> Create a new album!</h1>
+
+<%= render partial: "layouts/errors" %>
+
+<%= render partial: "form",
+  locals: { album: @album, bands: @bands, current_band_id: @current_band }%>
