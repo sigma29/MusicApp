@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user
+  helper_method :current_user, :can_delete_this_note?
 
   def login!(user)
     session[:session_token] = user.reset_session_token!
@@ -29,5 +29,9 @@ class ApplicationController < ActionController::Base
 
   def require_no_user
     redirect_to user_url(current_user) if logged_in?
+  end
+
+  def can_delete_this_note?(note)
+    current_user.id == note.user_id
   end
 end

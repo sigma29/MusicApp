@@ -17,6 +17,11 @@
 <p><%= @track.lyrics %></p>
 
 
+
+<%= render partial: "notes/note", locals: { notes: @notes } %>
+<br>
+
+
 <a href="<%= edit_track_url(@track) %>">Edit this track</a>
 <br>
 

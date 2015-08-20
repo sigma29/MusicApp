@@ -1,0 +1,24 @@
+<h3>Notes for this track</h3>
+<% notes.each do |note| %>
+  <p>
+    <%= note.note_text %>
+    <br>
+    --<%= note.user.email %>
+    <% if can_delete_this_note?(note) %>
+      <form action="<%= note_url(note) %>" method="post">
+        <%= auth_token %>
+        <input type="hidden" name="_method" value="delete">
+        <button>Delete this note</button>
+      </form>
+    <% end %>
+  </p>
+<% end %>
+
+<h3>Submit a note on this track!</h3>
+  <form action="<%= track_notes_url(params[:id]) %>" method="post">
+    <%= auth_token %>
+    <textarea name="note[note_text]"></textarea>
+    <br>
+    <button>Submit Note</button>
+  </form>
+<form>
