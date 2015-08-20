@@ -1,0 +1,22 @@
+<h1> Sign Up! </h1>
+
+<%= render partial: "layouts/errors" %>
+
+<form action="<%= users_url %>" method="post">
+  <%= auth_token %>
+
+  <label for="user_email">E-mail</label>
+  <input
+    type="text"
+    id="user_email"
+    name="user[email]"
+    value="<%= @user.email %>">
+  <br>
+
+  <label for="user_password">Password</label>
+  <input type="password" id="user_password" name="user[password]">
+  <br>
+
+  <button>Register</button>
+
+</form>
